@@ -1,0 +1,30 @@
+{
+  "name": "@omadia/plugin-llm-openai",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/plugin.js",
+  "types": "dist/plugin.d.ts",
+  "description": "Contributes OpenAI (GPT-5.x family) as an admin-selectable, OpenAI-compatible LLM provider for omadia. Declarative provider plugin — registered from its manifest, no runtime provider code.",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test test/**/*.test.ts"
+  },
+  "peerDependencies": {
+    "@omadia/plugin-api": "*",
+    "@omadia/llm-provider": "*"
+  },
+  "peerDependenciesMeta": {
+    "@omadia/plugin-api": { "optional": true },
+    "@omadia/llm-provider": { "optional": true }
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "yaml": "^2.5.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
