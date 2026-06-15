@@ -4,7 +4,7 @@ identity:
   id: "@omadia/plugin-llm-openai"
   name: "OpenAI (GPT) LLM Provider"
   version: "0.1.0"
-  kind: "provider"
+  kind: "extension"
   domain: "llm.provider.openai"
   description: "Macht OpenAI (GPT-5.x-Familie) als admin-wählbaren, OpenAI-kompatiblen LLM-Provider in omadia verfügbar. Deklarativer Provider — wird aus diesem Manifest registriert, ohne Laufzeit-Provider-Code."
   authors:
