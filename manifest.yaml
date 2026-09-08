@@ -3,7 +3,7 @@ schema_version: "1"
 identity:
   id: "@omadia/plugin-llm-openai"
   name: "OpenAI (GPT) LLM Provider"
-  version: "0.1.0"
+  version: "0.2.0"
   kind: "extension"
   domain: "llm.provider.openai"
   description: "Macht OpenAI (GPT-5.x-Familie) als admin-wählbaren, OpenAI-kompatiblen LLM-Provider in omadia verfügbar. Deklarativer Provider — wird aus diesem Manifest registriert, ohne Laufzeit-Provider-Code."
@@ -38,36 +38,84 @@ llm_provider:
   quirks:
     # GPT-5 / o-series reject the deprecated max_tokens — must send max_completion_tokens.
     max_tokens_field: "max_completion_tokens"
+  # models is the offline seed; discovery rules must never name a version.
+  # OpenAI lists only ids, so every rule supplies fallback capabilities.
+  discovery:
+    include:
+      - "^gpt-\\d"
+    exclude:
+      - "(audio|realtime|transcribe|tts|whisper|image|dall-e|embedding|moderation|search|codex|instruct|computer-use|deep-research|chat-latest)"
+      - "-pro$"
+    classify:
+      # The newest plain/sol generation defaults to frontier; older ones become balanced.
+      - match: "^gpt-\\d+(\\.\\d+)?(-sol)?$"
+        class: "frontier"
+        rest_class: "balanced"
+        max_tokens: 128000
+        context_window: 400000
+        vision: true
+        effort_levels: ["low", "medium", "high", "xhigh"]
+        effort_default: "medium"
+      # Premium frontier follows plain/sol so it cannot take their class default.
+      - match: "-astra$"
+        class: "frontier"
+        max_tokens: 128000
+        context_window: 1000000
+        vision: true
+        effort_levels: ["low", "medium", "high", "xhigh"]
+        effort_default: "medium"
+      - match: "-(mini|terra)$"
+        class: "balanced"
+        max_tokens: 128000
+        context_window: 400000
+        vision: true
+        effort_levels: ["low", "medium", "high", "xhigh"]
+        effort_default: "medium"
+      - match: "-(nano|luna)$"
+        class: "fast"
+        max_tokens: 128000
+        context_window: 400000
+        vision: true
+        effort_levels: ["low", "medium", "high", "xhigh"]
+        effort_default: "medium"
   models:
-    - id: "openai:gpt-5.5"
-      model_id: "gpt-5.5"
-      label: "GPT-5.5"
+    - id: "openai:gpt-5.6-sol"
+      model_id: "gpt-5.6-sol"
+      label: "GPT-5.6 Sol"
       class: "frontier"
       max_tokens: 128000
-      context_window: 1047576
-      vision: true
-    - id: "openai:gpt-5.4"
-      model_id: "gpt-5.4"
-      label: "GPT-5.4"
-      class: "balanced"
-      max_tokens: 128000
-      context_window: 400000
-      vision: true
-    - id: "openai:gpt-5.4-mini"
-      model_id: "gpt-5.4-mini"
-      label: "GPT-5.4 mini"
-      class: "fast"
-      max_tokens: 128000
-      context_window: 400000
+      context_window: 1050000
       vision: true
       class_default: true
-    - id: "openai:gpt-5.4-nano"
-      model_id: "gpt-5.4-nano"
-      label: "GPT-5.4 nano"
+      effort_levels: ["low", "medium", "high", "xhigh"]
+      effort_default: "medium"
+    - id: "openai:gpt-6-astra"
+      model_id: "gpt-6-astra"
+      label: "GPT-6 Astra"
+      class: "frontier"
+      max_tokens: 128000
+      context_window: 1050000
+      vision: true
+      effort_levels: ["low", "medium", "high", "xhigh"]
+      effort_default: "medium"
+    - id: "openai:gpt-5.6-terra"
+      model_id: "gpt-5.6-terra"
+      label: "GPT-5.6 Terra"
+      class: "balanced"
+      max_tokens: 128000
+      context_window: 1050000
+      vision: true
+      effort_levels: ["low", "medium", "high", "xhigh"]
+      effort_default: "medium"
+    - id: "openai:gpt-5.6-luna"
+      model_id: "gpt-5.6-luna"
+      label: "GPT-5.6 Luna"
       class: "fast"
       max_tokens: 128000
-      context_window: 400000
+      context_window: 1050000
       vision: true
+      effort_levels: ["low", "medium", "high", "xhigh"]
+      effort_default: "medium"
 
 setup:
   fields:

@@ -24,10 +24,10 @@ omadia ist ein selbst-hostbares agentisches OS: stelle Multi-Agent-Teams aus sig
 
 | Modell | Klasse |
 | --- | --- |
-| GPT-5.5 | frontier |
-| GPT-5.4 | balanced |
-| GPT-5.4 mini | fast |
-| GPT-5.4 nano | fast |
+| GPT-5.6 Sol | frontier |
+| GPT-6 Astra | frontier |
+| GPT-5.6 Terra | balanced |
+| GPT-5.6 Luna | fast |
 
 Agenten fragen eine Klasse an (`fast`, `balanced`, `frontier`). omadia bildet die Klasse auf das Modell ab, ein Agent nennt also nie ein festes Modell.
 
