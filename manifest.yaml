@@ -3,8 +3,10 @@ schema_version: "1"
 identity:
   id: "@omadia/plugin-llm-openai"
   name: "OpenAI (GPT) LLM Provider"
-  version: "0.2.0"
-  kind: "extension"
+  version: "0.3.0"
+  # Model plugin (kind `model`): only the kernel's model gateway calls it. The provider
+  # is contributed declaratively via the `llm_provider` block below.
+  kind: "model"
   domain: "llm.provider.openai"
   description: "Macht OpenAI (GPT-5.x-Familie) als admin-wählbaren, OpenAI-kompatiblen LLM-Provider in omadia verfügbar. Deklarativer Provider — wird aus diesem Manifest registriert, ohne Laufzeit-Provider-Code."
   authors:
@@ -17,7 +19,7 @@ identity:
     - "infrastructure"
 
 compat:
-  core: ">=1.0 <2.0"
+  core: ">=1.75.0 <2.0"
   node: ">=20"
 
 lifecycle:
