@@ -33,7 +33,7 @@ Agents ask for a class (`fast`, `balanced`, `frontier`). omadia maps the class t
 
 ## How it works in omadia
 
-A declarative provider plugin, so it ships no runtime provider code. The omadia kernel reads the `llm_provider` block from `manifest.yaml` (id, base URL, models) when the plugin loads, before any agent activates, and registers it in the provider catalog. OpenAI speaks the canonical OpenAI Chat Completions API. GPT-5 tightened the schema, so the manifest declares the `max_completion_tokens` quirk to keep requests valid.
+A model plugin (kind `model`); only the kernel's model gateway calls it. It is a declarative provider plugin, so it ships no runtime provider code. The omadia kernel reads the `llm_provider` block from `manifest.yaml` (id, base URL, models) when the plugin loads, before any agent activates, and registers it in the provider catalog. OpenAI speaks the canonical OpenAI Chat Completions API. GPT-5 tightened the schema, so the manifest declares the `max_completion_tokens` quirk to keep requests valid.
 
 ## Install
 

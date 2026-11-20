@@ -33,7 +33,7 @@ Agenten fragen eine Klasse an (`fast`, `balanced`, `frontier`). omadia bildet di
 
 ## So funktioniert es in omadia
 
-Ein deklaratives Provider-Plugin, es bringt also keinen Laufzeit-Code mit. Der omadia-Kernel liest beim Laden den `llm_provider`-Block aus `manifest.yaml` (id, Base-URL, Modelle), bevor ein Agent aktiviert wird, und registriert ihn im Provider-Katalog. OpenAI spricht die kanonische OpenAI-Chat-Completions-API. GPT-5 hat das Schema verschärft, also deklariert das Manifest den `max_completion_tokens`-Quirk, damit Anfragen gültig bleiben.
+Ein Modell-Plugin (Kind `model`); nur das Modell-Gateway des Kernels ruft es auf. Es ist ein deklaratives Provider-Plugin, es bringt also keinen Laufzeit-Code mit. Der omadia-Kernel liest beim Laden den `llm_provider`-Block aus `manifest.yaml` (id, Base-URL, Modelle), bevor ein Agent aktiviert wird, und registriert ihn im Provider-Katalog. OpenAI spricht die kanonische OpenAI-Chat-Completions-API. GPT-5 hat das Schema verschärft, also deklariert das Manifest den `max_completion_tokens`-Quirk, damit Anfragen gültig bleiben.
 
 ## Installation
 
