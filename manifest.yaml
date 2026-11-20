@@ -145,6 +145,8 @@ permissions:
   network:
     outbound:
       - "api.openai.com"
+      # Operator-configured base URL (proxy/gateway/remote); the kernel allows its host.
+      - "$config.openai_base_url"
   filesystem:
     scratch: false
 
